@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/blue"
+
+
+    tools:context=".ui.dashboard.DashboardFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/quickBtn"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/green"
+            android:padding="40dp"
+            android:text="@string/quickBtn"
+            android:paddingTop="0dp"
+            android:textAlignment="center"
+            android:theme="@style/Button.green"
+            app:layout_constraintBottom_toTopOf="@id/withoutTimer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/withoutTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/green"
+            android:padding="40dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/withoutBtn"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:theme="@style/Button.green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/startTime"
+            app:layout_constraintTop_toBottomOf="@+id/quickBtn" />
+
+        <Button
+            android:id="@+id/startTime"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/green"
+            android:padding="40dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/startTimeBtn"
+            android:textAlignment="center"
+            android:theme="@style/Button.green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/withoutTimer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.start.login.RegisterFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <EditText
+            android:id="@+id/firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/firstnameText"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/lastname" />
+
+
+
+        <EditText
+            android:id="@+id/lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lastnameText"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/emailText"
+       />
+
+        <EditText
+            android:id="@+id/emailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/emailText"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/passwordText"
+          />
+
+        <EditText
+            android:id="@+id/passwordText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/passwordText"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/emailText" />
+
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirmText"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/signUp"
+            app:layout_constraintTop_toBottomOf="@id/passwordText" />
+
+        <Button
+            android:id="@+id/signUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/green"
+            android:text="@string/signUpBtn"
+            android:theme="@style/Button.green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirmPassword" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

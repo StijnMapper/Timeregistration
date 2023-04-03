@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_project">Projects</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_time">Time registrations</string>
+    <string name="title_date">Calendar</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_title">Time registration</string>
+    <string name="loginBtn">Sign In</string>
+    <string name="registerBtn">Register</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="emailText">Email</string>
+    <string name="passwordText">Password</string>
+    <string name="confirmText">Confirm password</string>
+    <string name="lastnameText">Lastname</string>
+    <string name="firstnameText">Firstname</string>
+    <string name="signUpBtn">Sign Up</string>
+    <string name="continueBtn">Continue</string>
+    <string name="quickBtn">Quick start</string>
+    <string name="withoutBtn">Without Timer</string>
+    <string name="startTimeBtn">Start time registration</string>
+    <string name="tagsText">Tags</string>
+    <string name="taskText">Task</string>
+    <string name="dateText">Date</string>
+    <string name="projectText">Select a project..</string>
+    <string name="startTime">Start time</string>
+    <string name="EndTime">End time</string>
+    <string name="title_activity_bottom">BottomActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Notifications</string>
+</resources>
