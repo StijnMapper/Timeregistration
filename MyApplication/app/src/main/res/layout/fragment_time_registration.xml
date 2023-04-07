@@ -29,6 +29,20 @@
             android:minWidth="500dp"
             android:minHeight="120dp"
             android:src="@drawable/ic_play"
+            android:visibility="visible"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toTopOf="@id/tags"
+            app:layout_constraintTop_toBottomOf="@id/chronometer" />
+
+        <ImageView
+            android:id="@+id/stopBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:minWidth="500dp"
+            android:minHeight="120dp"
+            android:src="@drawable/ic_stop"
+            android:visibility="gone"
             android:textSize="50sp"
             app:layout_constraintBottom_toTopOf="@id/tags"
             app:layout_constraintTop_toBottomOf="@id/chronometer" />
@@ -41,7 +55,6 @@
             android:hint="@string/tagsText"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/task" />
-
 
         <EditText
             android:id="@+id/task"
