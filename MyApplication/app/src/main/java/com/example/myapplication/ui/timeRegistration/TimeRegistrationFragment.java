@@ -21,7 +21,7 @@ import com.example.myapplication.ui.start.login.LoginFragment;
 
 public class TimeRegistrationFragment extends Fragment {
     private FragmentTimeRegistrationBinding binding;
-
+    private  boolean isRunning = false;
     public TimeRegistrationFragment() {
         // Required empty public constructor
     }
@@ -38,11 +38,19 @@ public class TimeRegistrationFragment extends Fragment {
         binding.playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.chronometer.start();
+                if (isRunning) {
+                    // Stop the chronometer
+                    binding.chronometer.stop();
+                    isRunning = false;
+                } else {
+                    // Start the chronometer
+                    binding.chronometer.setBase(SystemClock.elapsedRealtime());
+                    binding.chronometer.start();
+                    isRunning = true;
+                }
+
             }
         });
-
-        // Return the root view of the binding
         return binding.getRoot();
     }
 
