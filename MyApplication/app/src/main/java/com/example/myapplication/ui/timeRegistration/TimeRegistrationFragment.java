@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentChronometerBinding;
@@ -21,7 +22,6 @@ import com.example.myapplication.ui.start.login.LoginFragment;
 
 public class TimeRegistrationFragment extends Fragment {
     private FragmentTimeRegistrationBinding binding;
-    private  boolean isRunning = false;
     public TimeRegistrationFragment() {
         // Required empty public constructor
     }
@@ -35,23 +35,32 @@ public class TimeRegistrationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentTimeRegistrationBinding binding = FragmentTimeRegistrationBinding.inflate(inflater, container, false);
-        binding.playBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isRunning) {
-                    // Stop the chronometer
-                    binding.chronometer.stop();
-                    isRunning = false;
-                } else {
-                    // Start the chronometer
-                    binding.chronometer.setBase(SystemClock.elapsedRealtime());
-                    binding.chronometer.start();
-                    isRunning = true;
-                }
+        View view = binding.getRoot();
 
-            }
-        });
-        return binding.getRoot();
+        // Zoek de buttons op in de view
+        ImageView playBtn = view.findViewById(R.id.playBtn);
+        ImageView stopBtn = view.findViewById(R.id.stopBtn);
+                playBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Start de chronometer
+                        binding.chronometer.start();
+                        // Verberg de playBtn en toon de stopBtn
+                        playBtn.setVisibility(View.GONE);
+                        stopBtn.setVisibility(View.VISIBLE);
+                    }
+                });
+                stopBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Stop de chronometer
+                        binding.chronometer.stop();
+                        // Verberg de stopBtn en toon de playBtn
+                        stopBtn.setVisibility(View.GONE);
+                        playBtn.setVisibility(View.VISIBLE);
+                    }
+                });
+        return view;
     }
 
 
