@@ -19,8 +19,6 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/lastname" />
 
-
-
         <EditText
             android:id="@+id/lastname"
             android:layout_width="match_parent"
