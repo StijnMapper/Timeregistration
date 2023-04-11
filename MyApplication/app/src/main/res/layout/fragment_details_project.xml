@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".DetailsProject">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+<TextView
+    android:id="@+id/text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Total worked hours"
+    android:gravity="center_horizontal"
+    android:textStyle="bold"
+    android:textSize="20dp"
+    android:background="@color/blue"
+    app:layout_constraintTop_toBottomOf="parent"
+    android:padding="7dp"
+    app:layout_constraintBottom_toTopOf="@id/chronometer"/>
+
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:textAlignment="center"
+        android:textSize="50sp"
+        android:format="%s:%s:%s"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        app:layout_constraintBottom_toTopOf="@id/timeRegist"/>
+
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search.."
+            android:background="@color/blue"
+            app:layout_constraintTop_toBottomOf="@id/chronometer"
+            app:layout_constraintBottom_toTopOf="@id/timeRegist"/>
+        <TextView
+            android:layout_marginTop="100dp"
+            android:id="@+id/timeRegist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time Registration"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:background="@color/white"
+            android:textColor="@color/blue"
+            app:layout_constraintTop_toBottomOf="@id/chronometer"
+            app:layout_constraintBottom_toTopOf="parent"
+            android:padding="7dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
