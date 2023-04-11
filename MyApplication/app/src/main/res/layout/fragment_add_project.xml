@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddProject">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:padding="10dp"
+            android:text="Project name"
+            app:layout_constraintBottom_toTopOf="@+id/goal"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <EditText
+            android:id="@+id/goal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/blue"
+            android:padding="10dp"
+            android:text="Goal"
+            app:layout_constraintBottom_toTopOf="@id/description"
+            app:layout_constraintTop_toBottomOf="@id/name" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/blue"
+            android:padding="10dp"
+            android:text="Description"
+            app:layout_constraintBottom_toTopOf="@id/client"
+            app:layout_constraintTop_toBottomOf="@+id/goal" />
+
+        <EditText
+            android:id="@+id/client"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/blue"
+            android:padding="10dp"
+            android:text="Client"
+            app:layout_constraintBottom_toTopOf="@id/deadline"
+            app:layout_constraintTop_toBottomOf="@id/description" />
+
+        <EditText
+            android:id="@+id/deadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/blue"
+            android:padding="10dp"
+            android:text="Final deadline"
+            app:layout_constraintBottom_toTopOf="@id/budget"
+            app:layout_constraintTop_toBottomOf="@id/client" />
+
+        <EditText
+            android:id="@+id/budget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/blue"
+            android:padding="10dp"
+            android:text="Budget"
+            app:layout_constraintBottom_toTopOf="@id/billable"
+            app:layout_constraintTop_toBottomOf="@id/deadline" />
+
+        <EditText
+            android:id="@+id/billable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/blue"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="Billable"
+            app:layout_constraintBottom_toTopOf="@id/save"
+            app:layout_constraintTop_toBottomOf="@id/budget" />
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginLeft="70dp"
+            android:backgroundTint="@color/green"
+            android:text="Save"
+            android:theme="@style/Button.green"
+            app:layout_constraintTop_toBottomOf="@id/billable"
+           />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
