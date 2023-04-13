@@ -2,30 +2,23 @@ package com.example.myapplication.ui.timeRegistration;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.ImageView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.FragmentChronometerBinding;
-import com.example.myapplication.databinding.FragmentLoginBinding;
 import com.example.myapplication.databinding.FragmentTimeRegistrationBinding;
-import com.example.myapplication.ui.start.login.LoginFragment;
 
 public class TimeRegistrationFragment extends Fragment {
     private FragmentTimeRegistrationBinding binding;
     public TimeRegistrationFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +29,10 @@ public class TimeRegistrationFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentTimeRegistrationBinding binding = FragmentTimeRegistrationBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Timer");
+        }
 
         // Zoek de buttons op in de view
         ImageView playBtn = view.findViewById(R.id.playBtn);
