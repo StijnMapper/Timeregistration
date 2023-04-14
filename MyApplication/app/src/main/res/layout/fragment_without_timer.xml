@@ -20,6 +20,8 @@
             android:textSize="20sp"
             android:layout_marginBottom="20dp"
             android:inputType="text"
+            android:background="@color/blue"
+            android:textColorHint="@color/white"
             app:layout_constraintBottom_toTopOf="@id/date"
         />
         <EditText
@@ -29,7 +31,13 @@
             android:hint="@string/dateText"
             android:textSize="20sp"
             android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="15dp"
             android:inputType="date"
+            android:background="@color/blue"
+            android:textColorHint="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/task" />
 
 
@@ -39,9 +47,14 @@
             android:layout_height="wrap_content"
             android:hint="@string/taskText"
             android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="15dp"
             android:layout_marginTop="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/tags"
-            />
+            android:layout_marginBottom="50dp"
+            android:background="@color/blue"
+            android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/tags" />
 
         <EditText
             android:id="@+id/tags"
@@ -50,8 +63,14 @@
             android:hint="@string/tagsText"
             android:textSize="20sp"
             android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="15dp"
+            android:textAlignment="center"
+            android:background="@color/blue"
+            android:textColorHint="@color/white"
             app:layout_constraintTop_toBottomOf="@id/tags" />
-
 
 
         <EditText
@@ -61,6 +80,12 @@
             android:hint="@string/startTime"
             android:textSize="20sp"
             android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="15dp"
+            android:background="@color/blue"
+            android:textColorHint="@color/white"
             app:layout_constraintTop_toBottomOf="@id/tags"
             app:layout_constraintBottom_toTopOf="@id/endTime"/>
         <EditText
@@ -70,6 +95,12 @@
             android:hint="@string/EndTime"
             android:textSize="20sp"
             android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="15dp"
+            android:background="@color/blue"
+            android:textColorHint="@color/white"
             app:layout_constraintTop_toBottomOf="@id/endTime"
             app:layout_constraintBottom_toTopOf="@id/save"/>
         <Button
@@ -78,7 +109,11 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"
             android:text="Save"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="15dp"
             android:theme="@style/Button.green"
+            android:textColor="@color/white"
             android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/endTime" />

@@ -22,8 +22,6 @@
         android:name="com.example.myapplication.ui.start.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
-
-
         <action
             android:id="@+id/action_loginFragment_to_mainActivity2"
             app:destination="@id/mainActivity2" />
