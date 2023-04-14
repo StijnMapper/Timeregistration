@@ -11,30 +11,24 @@ tools:context=".ui.dashboard.QuickStartFragment">
         android:id="@+id/chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/green"
         android:textSize="30sp" />
 
     <ImageView
+        android:id="@+id/playBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="50dp"
-        android:minWidth="100dp"
+        android:minWidth="500dp"
+        android:minHeight="120dp"
+        android:visibility="visible"
         android:src="@drawable/ic_play"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="startChronometer"
-        android:text="Start" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="pauseChronometer"
-        android:text="Pause" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="resetChronometer"
-        android:text="Reset" />
+    <ImageView
+        android:id="@+id/stopBtn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="500dp"
+        android:minHeight="120dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_stop"/>
 
 </LinearLayout>
