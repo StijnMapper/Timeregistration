@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -9,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
     TextView textView;
-    Button button;
-    Button edit;
+    ImageButton button;
+    ImageButton edit;
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
         textView=itemView.findViewById(R.id.item);
