@@ -83,3 +83,11 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+MyApplication/app/src/main/res/drawable-hdpi/ic_delete.png
+MyApplication/app/src/main/res/drawable-hdpi/ic_edit.png
+MyApplication/app/src/main/res/drawable-mdpi/ic_delete.png
+MyApplication/app/src/main/res/drawable-mdpi/ic_edit.png
+MyApplication/app/src/main/res/drawable-xhdpi/ic_delete.png
+MyApplication/app/src/main/res/drawable-xhdpi/ic_edit.png
+MyApplication/app/src/main/res/drawable-xxhdpi/ic_delete.png
+MyApplication/app/src/main/res/drawable-xxhdpi/ic_edit.png

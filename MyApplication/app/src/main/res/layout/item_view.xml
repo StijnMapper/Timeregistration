@@ -11,7 +11,7 @@
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="10dp"
         android:layout_margin="10dp">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
@@ -23,25 +23,24 @@
                 android:textFontWeight="100"
                 android:textSize="20dp"
                 android:textColor="@color/black"/>
-            <Button
+            <ImageButton
                 android:id="@+id/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:backgroundTint="@color/red"
+                android:src="@drawable/ic_delete"
                 android:text="delete"
                 android:layout_marginLeft="40dp"
-                android:textColor="@color/white"/>
-            <Button
+             />
+            <ImageButton
                 android:id="@+id/edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:backgroundTint="@color/green"
+                android:src="@drawable/ic_edit"
                 android:text="edit"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/white"/>
+                android:layout_marginLeft="20dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
