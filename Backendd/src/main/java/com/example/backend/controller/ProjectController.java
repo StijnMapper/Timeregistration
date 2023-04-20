@@ -17,22 +17,20 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @PostMapping("/create") //OK
-    public Project createProject(@RequestBody Project project) {
-        return projectService.createProject(project);
-    }
-
-    //OK
     @GetMapping("/projects/{id}")
     public Project getProjectById(@PathVariable int id) {
         Optional<Project> optionalProject = Optional.ofNullable(projectService.getProjectById(id));
         return optionalProject.orElseThrow(() -> new NullPointerException("Project not found with id: " + id));
     }
 
-    //OK
     @GetMapping("/projects")
     public List<Project> getAllProjects() {
         return projectService.getAllProjects();
+    }
+
+    @PostMapping("/create")
+    public Project createProject(@RequestBody Project project) {
+        return projectService.createProject(project);
     }
 
     @PutMapping("/projects/{id}")
@@ -47,7 +45,6 @@ public class ProjectController {
         }
     }
 
-    //OK
     @DeleteMapping("projects/{id}")
     public ResponseEntity<String> deleteProject(@PathVariable("id") int id) {
         projectService.deleteProject(id);
