@@ -1,13 +1,18 @@
 package com.example.backend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Data
 @Entity
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class TimeRegistration {
-
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +35,5 @@ public class TimeRegistration {
         @JoinColumn(name = "taskId")
         private Task task;
 
-        // getters and setters
     }
 
