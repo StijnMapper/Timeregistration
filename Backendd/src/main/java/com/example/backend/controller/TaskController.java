@@ -43,14 +43,8 @@ public class TaskController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable("id") int taskId) {
         boolean success = taskService.deleteTask(taskId);
-        if (success) {
             taskService.deleteTask(taskId);
             return ResponseEntity.ok("Task met ID " + taskId + " succesvol verwijderd.");
-        } else {
-            return new ResponseEntity<>("Task met ID " + taskId + " bestaat niet", HttpStatus.NOT_FOUND);
-        }
-       // taskService.deleteTask(taskId);
-        //return ResponseEntity.ok("Task met ID " + taskId + " succesvol verwijderd.");
     }
 
 }
