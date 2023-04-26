@@ -5,60 +5,69 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.databinding.FragmentDashboardBinding;
+import com.example.myapplication.data.model.Project;
 import com.example.myapplication.databinding.FragmentProjectsBinding;
-import com.example.myapplication.ui.dashboard.DashboardFragment;
-import com.example.myapplication.ui.timeRegistration.AllTimeRegistrationsFragment;
+import com.example.myapplication.retrofit.RetrofitClient;
+import com.example.myapplication.service.ProjectService;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProjectsFragment extends Fragment {
-    ListView list;
-    ArrayAdapter<String>adapter;
-    String[] data = {"project 1","project 2", "project 3", "project 4", "project 5", "project 6", "project 7", "project 8", "project 9", "project 10" };
-public ProjectsFragment() {}
-private FragmentProjectsBinding binding;
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentProjectsBinding.inflate(inflater, container, false);
-        binding = FragmentProjectsBinding.inflate(inflater, container, false);
+    private TextView nameTextView;
+    private ProjectListAdapter projectAdapter;
+    List<Project> projects = new ArrayList<>();
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_projects, container, false);
 
-        binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
+        nameTextView = root.findViewById(R.id.listview);
+        projectAdapter = new ProjectListAdapter(getContext(), projects);
+
+        // Hier wordt de methode getAllProjects() aangeroepen
+        ProjectService service = RetrofitClient.getRetrofitInstance().create(ProjectService.class);
+        Call<List<Project>> call = service.getAllProjects();
+
+        call.enqueue(new Callback<List<Project>>() {
             @Override
-            public void onClick(View view) {
-                //navigeer naar quick start fragment
-                NavHostFragment.findNavController(ProjectsFragment.this)
-                        .navigate(R.id.action_navigation_project_to_addProject);
+            public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
+                if (response.isSuccessful()) {
+                    projects.addAll(response.body());
+                    projectAdapter.notifyDataSetChanged();
+                    Log.d("Tag", "Number of projects retrieved: " + projects.size());
 
+                    // Set the name of the first project in the TextView
+                    nameTextView.setText(projects.get(0).getName());
+
+                } else {
+                    Log.d("Tag", "Error: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Project>> call, Throwable t) {
+                Log.d("Tag", "Error: " + t.getMessage());
             }
         });
-        binding.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //navigeer naar quick start fragment
-                NavHostFragment.findNavController(ProjectsFragment.this)
-                        .navigate(R.id.action_navigation_project_to_detailsProject);
-            }
-        });
-        View root = binding.getRoot();
-        View view = inflater.inflate(R.layout.fragment_projects,container,false);
-        list=(ListView) root.findViewById(R.id.listview);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,data);
-        list.setAdapter(adapter);
+
         return root;
     }
-
-
-
 }
