@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.myapplication.MyAdapter;
 import com.example.myapplication.R;
 import com.example.myapplication.data.model.Project;
 import com.example.myapplication.databinding.FragmentProjectsBinding;
@@ -29,42 +31,46 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class ProjectsFragment extends Fragment {
-    private TextView nameTextView;
-    private ProjectListAdapter projectAdapter;
-    List<Project> projects = new ArrayList<>();
+    private ProjectAdapter projectAdapter;
+    private RecyclerView recyclerView;
+    private List<Project> projects = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_projects, container, false);
 
-        nameTextView = root.findViewById(R.id.listview);
-        projectAdapter = new ProjectListAdapter(getContext(), projects);
+        //Initialize adapter, contains a list of project objects as dataset
+        projectAdapter = new ProjectAdapter(getContext(), projects);
+        //show project objects in RecyclerView.
+        recyclerView = root.findViewById(R.id.listview);
+        recyclerView.setAdapter(projectAdapter);
+        //set the view of the recyclerview, show it vertical
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Hier wordt de methode getAllProjects() aangeroepen
+        //service for access to getAllProjects
         ProjectService service = RetrofitClient.getRetrofitInstance().create(ProjectService.class);
+        //Retrieve all projects
         Call<List<Project>> call = service.getAllProjects();
 
+        //asynchronous call to fetch all the projects and add the list of projects to the adapter.
+        //this done by using enqueue method of Call, which executes the call in a separate thread and
+        // processes the response in the callbacks that are defined.
         call.enqueue(new Callback<List<Project>>() {
             @Override
             public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
+                //success? , the onResponse callback retrieves the list of projects from the response
+                // adds it to the adapter using the setProjects method.
                 if (response.isSuccessful()) {
-                    projects.addAll(response.body());
-                    projectAdapter.notifyDataSetChanged();
+                    projects = response.body();
+                    projectAdapter.setProjects(projects);
                     Log.d("Tag", "Number of projects retrieved: " + projects.size());
-
-                    // Set the name of the first project in the TextView
-                    nameTextView.setText(projects.get(0).getName());
-
-                } else {
-                    Log.d("Tag", "Error: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
-                Log.d("Tag", "Error: " + t.getMessage());
+
             }
         });
 
