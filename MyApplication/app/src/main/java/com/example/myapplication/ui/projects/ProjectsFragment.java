@@ -1,24 +1,15 @@
 package com.example.myapplication.ui.projects;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.example.myapplication.MyAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.myapplication.R;
 import com.example.myapplication.data.model.Project;
 import com.example.myapplication.databinding.FragmentProjectsBinding;
@@ -31,6 +22,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class ProjectsFragment extends Fragment {
     private ProjectAdapter projectAdapter;
     private RecyclerView recyclerView;
@@ -39,15 +31,26 @@ public class ProjectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_projects, container, false);
+        FragmentProjectsBinding binding = FragmentProjectsBinding.inflate(inflater, container, false);
+        binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(ProjectsFragment.this)
+                        .navigate(R.id.action_navigation_project_to_addProject);
+            }
+        });
 
         //Initialize adapter, contains a list of project objects as dataset
         projectAdapter = new ProjectAdapter(getContext(), projects);
         //show project objects in RecyclerView.
-        recyclerView = root.findViewById(R.id.listview);
+        recyclerView = binding.listview;
         recyclerView.setAdapter(projectAdapter);
         //set the view of the recyclerview, show it vertical
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        fetchprojects();
+        return binding.getRoot();
+    }
+    private void fetchprojects(){
         //service for access to getAllProjects
         ProjectService service = RetrofitClient.getRetrofitInstance().create(ProjectService.class);
         //Retrieve all projects
@@ -64,16 +67,15 @@ public class ProjectsFragment extends Fragment {
                 if (response.isSuccessful()) {
                     projects = response.body();
                     projectAdapter.setProjects(projects);
-                    Log.d("Tag", "Number of projects retrieved: " + projects.size());
+                    //  Log.d("Tag", "Number of projects retrieved: " + projects.size());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
+                //Log.d("Tag", "Error: " + t.getMessage());
 
             }
         });
-
-        return root;
     }
 }
