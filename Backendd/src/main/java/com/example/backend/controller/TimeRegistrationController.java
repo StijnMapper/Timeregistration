@@ -6,14 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("time")
+@RequestMapping("/api")
 public class TimeRegistrationController {
     @Autowired
     private TimeRegistrationService timeRegistrationService;
+
+    @GetMapping("/registrations/project/{projectId}")
+    public ResponseEntity<List<TimeRegistration>> getTimeRegistrationsByProjectId(@PathVariable int projectId) {
+        List<TimeRegistration> timeRegistrations = timeRegistrationService.getTimeRegistrationsByProjectId(projectId);
+        if (timeRegistrations.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(timeRegistrations, HttpStatus.OK);
+        }
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<TimeRegistration> createTimeRegistration(@RequestBody TimeRegistration timeRegistration) {
@@ -26,7 +37,7 @@ public class TimeRegistrationController {
         List<TimeRegistration> timeRegistrations = timeRegistrationService.getAllTimeRegistrations();
         return new ResponseEntity<>(timeRegistrations, HttpStatus.OK);
     }
-
+    
     @GetMapping("get/{timeRegistrationId}")
     public ResponseEntity<TimeRegistration> getTimeRegistrationById(@PathVariable int timeRegistrationId) {
         TimeRegistration timeRegistration = timeRegistrationService.getTimeRegistrationById(timeRegistrationId);
