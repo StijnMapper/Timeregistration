@@ -1,11 +1,15 @@
 package com.example.backend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Task {
 
     @Id
@@ -19,9 +23,7 @@ public class Task {
     @Column(name = "tags")
     private String tags;
 
-    @ManyToOne
-    @JoinColumn(name = "registrationId")
+    @OneToOne(mappedBy = "task")
     private TimeRegistration registration;
 
-    // getters and setters
 }
