@@ -3,8 +3,6 @@ package com.example.backend.controller;
 import com.example.backend.model.Project;
 import com.example.backend.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
@@ -28,12 +26,12 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/projects/create")
     public Project createProject(@RequestBody Project project) {
         return projectService.createProject(project);
     }
 
-    @PutMapping("/projects/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Project> updateProject(@PathVariable("id") int projectId, @RequestBody Project project) {
         Optional<Project> existingProject = Optional.ofNullable(projectService.getProjectById(projectId));
         if (existingProject.isPresent()) {
