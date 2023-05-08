@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -19,6 +20,22 @@ import java.util.stream.Collectors;
 public class TimeRegistrationController {
     @Autowired
     private TimeRegistrationService timeRegistrationService;
+
+    @DeleteMapping("/registrations/project/{projectId}/{registrationId}")
+    public ResponseEntity<?> deleteTimeRegistration(@PathVariable int projectId, @PathVariable int registrationId) {
+        Optional<TimeRegistration> timeRegistration = Optional.ofNullable(timeRegistrationService.getTimeRegistrationById(registrationId));
+        if (timeRegistration.isPresent()) {
+            if (timeRegistration.get().getProject().getProjectId() == projectId) {
+                timeRegistrationService.deleteTimeRegistration(registrationId);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>("The specified time registration is not associated with the specified project", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<>("The specified time registration does not exist", HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @GetMapping("/registrations/project/{projectId}")
     public ResponseEntity<List<TimeRegistrationResponse>> getTimeRegistrationsByProjectId(@PathVariable int projectId) {
@@ -66,14 +83,15 @@ public class TimeRegistrationController {
         }
     }
     @DeleteMapping("delete/{timeRegistrationId}")
-    public ResponseEntity<String> deleteTimeRegistration(@PathVariable int timeRegistrationId) {
-        boolean deleted = timeRegistrationService.deleteTimeRegistration(timeRegistrationId);
-        if (deleted) {
-            return new ResponseEntity<>("Time registration with id " + timeRegistrationId + " has been deleted.", HttpStatus.OK);
+    public ResponseEntity<Void> deleteTimeRegistration(@PathVariable int registrationId) {
+        boolean success = timeRegistrationService.deleteTimeRegistration(registrationId);
+        if (success) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>("Time registration with id " + timeRegistrationId + " not found.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }}
+
 
 
 
