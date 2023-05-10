@@ -36,11 +36,22 @@ public class TimeRegistrationService {
         return timeRegistrationRepository.save(timeRegistration);
     }
 
-    public TimeRegistration updateTimeRegistration(int timeRegistrationId, TimeRegistration timeRegistrationDetails) {
-        TimeRegistration timeRegistration = timeRegistrationRepository.findById(timeRegistrationId).orElse(null);
-
-        return timeRegistrationRepository.save(timeRegistration);
+public TimeRegistration updateTimeRegistration(int registrationId, TimeRegistration updatedTimeRegistration) {
+    TimeRegistration timeRegistration = getTimeRegistrationById(registrationId);
+    if (timeRegistration == null) {
+        return null;
     }
+    //update timer
+    timeRegistration.getTimer().setStartTime(updatedTimeRegistration.getTimer().getStartTime());
+    timeRegistration.getTimer().setEndTime(updatedTimeRegistration.getTimer().getEndTime());
+    timeRegistration.getTimer().setDuration(updatedTimeRegistration.getTimer().getDuration());
+
+    //update task
+    timeRegistration.getTask().setName(updatedTimeRegistration.getTask().getName());
+    //update tags
+    timeRegistration.getTask().setTags(updatedTimeRegistration.getTask().getTags());
+    return timeRegistrationRepository.save(timeRegistration);
+}
 
     public boolean deleteTimeRegistration(int registrationId) {
         if (timeRegistrationRepository.existsById(registrationId)) {
