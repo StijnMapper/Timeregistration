@@ -76,17 +76,19 @@ public class DetailsProjectAdapter extends RecyclerView.Adapter<DetailsProjectAd
             }
 
         });
-        //navigate to details of time registration
+        //navigate to details of time registration = without timer fragment
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("registrationId", timeRegistration.getRegistrationId());
+                //show timer details in without timer fragment
+                bundle.putString("startTime", getFormattedTime(timeRegistration.getTimer().getStartTime()));
+                bundle.putString("endTime", getFormattedTime(timeRegistration.getTimer().getEndTime()));
                 Navigation.findNavController(view).navigate(R.id.action_detailsProject_to_withoutTimerFragment, bundle);
             }
         });
     }
-
     public void deleteTimeRegistration(int timeRegistrationId, int projectId) {
         TimeRegistrationService service = RetrofitClient.getRetrofitInstance().create(TimeRegistrationService.class);
         Call<Void> callDelete = service.deleteTimeRegistrationsByProjectId(projectId,timeRegistrationId);
@@ -154,7 +156,6 @@ public class DetailsProjectAdapter extends RecyclerView.Adapter<DetailsProjectAd
             delete = itemView.findViewById(R.id.delete);
             edit = itemView.findViewById(R.id.edit);
         }
-
     }
 
     // method to format the time as a string of timeregistrations
