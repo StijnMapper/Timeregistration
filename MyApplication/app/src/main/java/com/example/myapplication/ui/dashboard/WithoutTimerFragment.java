@@ -1,14 +1,14 @@
 package com.example.myapplication.ui.dashboard;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
-import com.example.myapplication.R;
+import androidx.fragment.app.Fragment;
+
+import com.example.myapplication.databinding.FragmentWithoutTimerBinding;
 
 public class WithoutTimerFragment extends Fragment {
     public WithoutTimerFragment() {
@@ -20,11 +20,21 @@ public class WithoutTimerFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_without_timer, container, false);
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState) {
+    FragmentWithoutTimerBinding binding = FragmentWithoutTimerBinding.inflate(inflater, container,false);
+    EditText startTimeText = binding.startTime;
+    EditText endTimeText = binding.endTime;
+    Bundle bundle = getArguments();
+    if (bundle != null) {
+        String startTime = bundle.getString("startTime");
+        String endTime = bundle.getString("endTime");
+        startTimeText.setText(startTime);
+        endTimeText.setText(endTime);
     }
+
+    return binding.getRoot();
+}
+
 }
