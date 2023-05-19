@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -20,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.myapplication.R;
-import com.example.myapplication.data.model.Project;
 import com.example.myapplication.data.model.Task;
 import com.example.myapplication.data.model.TimeRegistration;
 import com.example.myapplication.data.model.Timer;
@@ -44,8 +42,11 @@ public class WithoutTimerFragment extends Fragment {
     private int registrationId;
     private DetailsProjectAdapter adapter;
     private List<TimeRegistration> timeRegistrations = new ArrayList<>();
-    private Button btnDate;
-    private Button btnTime;
+    private Button btnStartDate;
+    private Button btnStartTime;
+    private Button btnEndDate;
+    private Button btnEndTime;
+
     private Calendar calendar;
     private TimeRegistration timeRegistration;
 
@@ -56,8 +57,9 @@ public class WithoutTimerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // Ontvang de argumenten van de DetailsProject
         if (getArguments() != null) {
+            // Haal de waarden op uit de argumenten
             registrationId = getArguments().getInt("registrationId");
             projectId = getArguments().getInt("projectId");
             timeRegistration = getArguments().getParcelable("timeRegistration");
@@ -70,35 +72,51 @@ public class WithoutTimerFragment extends Fragment {
         if (actionBar != null) {
             actionBar.setTitle("Update time registration");
         }
-        View rootView = inflater.inflate(R.layout.fragment_without_timer, container, false);
         FragmentWithoutTimerBinding binding = FragmentWithoutTimerBinding.inflate(inflater, container, false);
-        Button startDateText = binding.startTime;
-        Button startTimeText = binding.endTime;
+
+        // Koppel de weergave-elementen aan de variabelen
+        btnEndDate = binding.endDate;
+        btnEndTime = binding.endTime;
+        btnStartDate = binding.startDate;
+        btnStartTime = binding.startTime;
 
         Bundle bundle = getArguments();
 
         if (bundle != null) {
+            // Ontvang de waarden van de argumenten van DetailsprojectAdapter
             String startDate = bundle.getString("startDate");
+            String startTime = bundle.getString("startTime");
+            String endDate = bundle.getString("endDate");
             String endTime = bundle.getString("endTime");
 
-            startTimeText.setText(endTime);
-
-            // Bijwerken van de startdatumknop
-            startDateText.setText(startDate);
+            // Stel de waarden in op de weergave-elementen
+            btnStartTime.setText(startTime);
+            btnStartDate.setText(startDate);
+            btnEndDate.setText(endDate);
+            btnEndTime.setText(endTime);
         }
 
-
-        btnDate = binding.startTime;
-        btnTime = binding.endTime;
-
-        btnDate.setOnClickListener(new View.OnClickListener() {
+        btnStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog();
+            }
+        });
+        //Toon Datepicker en TimePicker
+        btnStartTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimePickerDialog();
+            }
+        });
+        btnEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();
             }
         });
 
-        btnTime.setOnClickListener(new View.OnClickListener() {
+        btnEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showTimePickerDialog();
@@ -117,7 +135,8 @@ public class WithoutTimerFragment extends Fragment {
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                btnDate.setText(dateFormat.format(calendar.getTime()));
+                btnStartDate.setText(dateFormat.format(calendar.getTime()));
+                btnEndDate.setText(dateFormat.format(calendar.getTime()));
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
@@ -131,51 +150,58 @@ public class WithoutTimerFragment extends Fragment {
                 calendar.set(Calendar.MINUTE, minute);
 
                 SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-                btnTime.setText(timeFormat.format(calendar.getTime()));
+                btnStartTime.setText(timeFormat.format(calendar.getTime()));
+                btnEndTime.setText(timeFormat.format(calendar.getTime()));
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
         timePickerDialog.show();
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         calendar = Calendar.getInstance();
+        // Haal einddatum en startdatum op uit de argumenten
+        String startTime = getArguments().getString("startTime");
+        String endDate = getArguments().getString("endDate");
 
-        String startTime = getArguments().getString("startDate");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
+            // Parse naar Date-objecten
             Date startDate = dateFormat.parse(startTime);
+            Date endDatee = dateFormat.parse(endDate);
+
             calendar.setTime(startDate);
-            btnDate.setText(dateFormat.format(calendar.getTime()));
+            calendar.setTime(endDatee);
+
+            // Stel de startdatum en einddatum in op de bijbehorende views
+            btnStartDate.setText(dateFormat.format(startDate));
+            btnEndDate.setText(dateFormat.format(endDatee));
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
-       //
-        adapter = new DetailsProjectAdapter(requireContext(), timeRegistrations);
+
+
+    adapter = new DetailsProjectAdapter(requireContext(), timeRegistrations);
         Button saveButton = view.findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Haal de geselecteerde datum en tijd op
-                String selectedDate = btnDate.getText().toString();
-                String selectedTime = btnTime.getText().toString();
+                String selectedDate = btnStartDate.getText().toString();
+                String selectedTime = btnStartTime.getText().toString();
                 timeRegistration = getArguments().getParcelable("timeRegistration");
 
-                // Voer hier de logica uit om de tijdregistratie bij te werken met de geselecteerde datum en tijd
-                // ...
-
-                // Toon een melding aan de gebruiker om aan te geven dat de tijdregistratie is bijgewerkt
-                Toast.makeText(getContext(), "Tijdregistratie bijgewerkt", Toast.LENGTH_SHORT).show();
                 //set timeregsitration
                 TimeRegistration timeRegistration = new TimeRegistration();
                 timeRegistration.setRegistrationId(2);
 
                 Timer timer = new Timer();
                 timer.setTimerId(1);
-                timer.setStartTime(null);
-                timer.setEndTime(null);
                 timer.setDuration(25);
+                // Wijs de Timer toe aan de tijdregistratie
                 timeRegistration.setTimer(timer);
 
                 Task task = new Task();
@@ -183,25 +209,17 @@ public class WithoutTimerFragment extends Fragment {
                 task.setTags("tag7");
                 timeRegistration.setTask(task);
 
-                Project project = new Project();
-                project.setProjectId(1);
-                project.setName("project1");
-                project.setStatus(null);
-                project.setDescription("descirption project3");
-                project.setUser(null);
-                timeRegistration.setProject(project);
-
                 //update time registration
-                updateTimeRegistration(projectId, registrationId,timeRegistration);
-                Log.d(WithoutTimerFragment.class.getSimpleName(),"projectid: "+projectId + " registeid: "+registrationId);
+                updateTimeRegistration(projectId, registrationId, timeRegistration);
+                Log.d(WithoutTimerFragment.class.getSimpleName(), "projectid: " + projectId + " registeid: " + registrationId);
                 // Ga terug naar het vorige scherm
                 FragmentManager fragmentManager = getParentFragmentManager();
                 fragmentManager.popBackStack();
-
             }
         });
     }
-    public void updateTimeRegistration(int projectId, int registrationId,TimeRegistration timeRegistration) {
+
+    public void updateTimeRegistration(int projectId, int registrationId, TimeRegistration timeRegistration) {
         TimeRegistrationService service = RetrofitClient.getRetrofitInstance().create(TimeRegistrationService.class);
         Call<TimeRegistration> call = service.updateTimeRegistration(projectId, registrationId, timeRegistration);
         call.enqueue(new Callback<TimeRegistration>() {
