@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
@@ -47,6 +48,8 @@ public class WithoutTimerFragment extends Fragment {
     private Button btnEndDate;
     private Button btnEndTime;
 
+    private EditText TextTags;
+    private EditText Texttask;
     private Calendar calendar;
     private TimeRegistration timeRegistration;
 
@@ -79,6 +82,8 @@ public class WithoutTimerFragment extends Fragment {
         btnEndTime = binding.endTime;
         btnStartDate = binding.startDate;
         btnStartTime = binding.startTime;
+        TextTags = binding.tags;
+        Texttask = binding.task;
 
         Bundle bundle = getArguments();
 
@@ -88,12 +93,16 @@ public class WithoutTimerFragment extends Fragment {
             String startTime = bundle.getString("startTime");
             String endDate = bundle.getString("endDate");
             String endTime = bundle.getString("endTime");
+            String tags = bundle.getString("tags");
+            String task = bundle.getString("task");
 
             // Stel de waarden in op de weergave-elementen
             btnStartTime.setText(startTime);
             btnStartDate.setText(startDate);
             btnEndDate.setText(endDate);
             btnEndTime.setText(endTime);
+            TextTags.setText(tags);
+            Texttask.setText(task);
         }
 
         btnStartDate.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +193,7 @@ public class WithoutTimerFragment extends Fragment {
         }
 
 
-    adapter = new DetailsProjectAdapter(requireContext(), timeRegistrations);
+        adapter = new DetailsProjectAdapter(requireContext(), timeRegistrations);
         Button saveButton = view.findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

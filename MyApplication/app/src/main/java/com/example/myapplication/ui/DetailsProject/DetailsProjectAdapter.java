@@ -109,6 +109,8 @@ public class DetailsProjectAdapter extends RecyclerView.Adapter<DetailsProjectAd
                 bundle.putString("endDate", formatDate(timeRegistration.getTimer().getEndTime()));
                 bundle.putString("startTime", formatTime(timeRegistration.getTimer().getStartTime()));
                 bundle.putString("endTime", formatTime(timeRegistration.getTimer().getEndTime()));
+                bundle.putString("tags",timeRegistration.getTask().getTags());
+                bundle.putString("task",timeRegistration.getTask().getName());
 
                 // Navigeer naar het volgende fragment (withouttimer) met de bundel als argument
                 Navigation.findNavController(view).navigate(R.id.action_detailsProject_to_withoutTimerFragment, bundle);
