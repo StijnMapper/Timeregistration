@@ -166,67 +166,70 @@ public class WithoutTimerFragment extends Fragment {
         timePickerDialog.show();
     }
 
+@Override
+public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    calendar = Calendar.getInstance();
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        calendar = Calendar.getInstance();
-        // Haal einddatum en startdatum op uit de argumenten
-        String startTime = getArguments().getString("startTime");
-        String endDate = getArguments().getString("endDate");
+    // Andere code ...
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            // Parse naar Date-objecten
-            Date startDate = dateFormat.parse(startTime);
-            Date endDatee = dateFormat.parse(endDate);
+    Button saveButton = view.findViewById(R.id.save);
+    saveButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Haal de geselecteerde datum en tijd op
+            String selectedStartDate = btnStartDate.getText().toString();
+            String selectedEndDate = btnEndDate.getText().toString();
+            String selectedStartTime = btnStartTime.getText().toString();
+            String selectedEndTime = btnEndTime.getText().toString();
+            String selectedTask = Texttask.getText().toString();
+            String selectedTags = TextTags.getText().toString();
+            timeRegistration = getArguments().getParcelable("timeRegistration");
 
-            calendar.setTime(startDate);
-            calendar.setTime(endDatee);
+            // Converteer de geselecteerde datum en tijd naar het backend-formaat
+            SimpleDateFormat frontendDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            SimpleDateFormat backendDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
-            // Stel de startdatum en einddatum in op de bijbehorende views
-            btnStartDate.setText(dateFormat.format(startDate));
-            btnEndDate.setText(dateFormat.format(endDatee));
+            try {
+                Date selectedStartDateTime = frontendDateFormat.parse(selectedStartDate + " " + selectedStartTime);
+                Date selectedEndDateTime = frontendDateFormat.parse(selectedEndDate + " " + selectedEndTime);
+                String formattedStartDateTime = backendDateFormat.format(selectedStartDateTime);
+                String formattedEndDateTime = backendDateFormat.format(selectedEndDateTime);
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+                if (timeRegistration == null) {
+                    timeRegistration = new TimeRegistration();
 
+                }
+                // Check if Timer is null and create a new Timer object
+                if (timeRegistration.getTimer() == null) {
+                    Timer timer = new Timer();
+                    timeRegistration.setTimer(timer);
+                }
+                // Check if Task is null and create a new Task object
+                if (timeRegistration.getTask() == null) {
+                    Task task = new Task();
+                    timeRegistration.setTask(task);
+                }
 
-        adapter = new DetailsProjectAdapter(requireContext(), timeRegistrations);
-        Button saveButton = view.findViewById(R.id.save);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Haal de geselecteerde datum en tijd op
-                String selectedDate = btnStartDate.getText().toString();
-                String selectedTime = btnStartTime.getText().toString();
-                timeRegistration = getArguments().getParcelable("timeRegistration");
-
-                //set timeregsitration
-                TimeRegistration timeRegistration = new TimeRegistration();
-                timeRegistration.setRegistrationId(2);
-
-                Timer timer = new Timer();
-                timer.setTimerId(1);
-                timer.setDuration(25);
-                // Wijs de Timer toe aan de tijdregistratie
-                timeRegistration.setTimer(timer);
-
-                Task task = new Task();
-                task.setName("task7");
-                task.setTags("tag7");
-                timeRegistration.setTask(task);
-
-                //update time registration
+          //      timeRegistration.getTimer().setStartTime(formattedDateTime);
+                timeRegistration.getTask().setName(selectedTask);
+                timeRegistration.getTask().setTags(selectedTags);
+                timeRegistration.getTimer().setStartTime(formattedStartDateTime);
+                timeRegistration.getTimer().setEndTime(formattedEndDateTime);
                 updateTimeRegistration(projectId, registrationId, timeRegistration);
-                Log.d(WithoutTimerFragment.class.getSimpleName(), "projectid: " + projectId + " registeid: " + registrationId);
-                // Ga terug naar het vorige scherm
+                Log.d(WithoutTimerFragment.class.getSimpleName(), projectId + " registerid" + registrationId + " " + timeRegistration);
+
+                // Terug naar het vorige scherm ...
                 FragmentManager fragmentManager = getParentFragmentManager();
                 fragmentManager.popBackStack();
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        });
-    }
+        }
+    });
+}
+
+
 
     public void updateTimeRegistration(int projectId, int registrationId, TimeRegistration timeRegistration) {
         TimeRegistrationService service = RetrofitClient.getRetrofitInstance().create(TimeRegistrationService.class);
@@ -243,6 +246,11 @@ public class WithoutTimerFragment extends Fragment {
                             break;
                         }
                     }
+                    if (timeRegistration.getTask() != null) {
+                        String taskName = timeRegistration.getTask().getName();
+                        // Voer verdere logica uit met de taaknaam
+                    }
+
 
                     Log.d(DetailsProjectAdapter.class.getSimpleName(), "Tijdregistratie succesvol bijgewerkt");
                 } else {
