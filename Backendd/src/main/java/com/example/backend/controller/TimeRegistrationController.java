@@ -20,6 +20,36 @@ import java.util.stream.Collectors;
 public class TimeRegistrationController {
     @Autowired
     private TimeRegistrationService timeRegistrationService;
+    /*
+    @PutMapping("update/registrations/project/{projectId}/{registrationId}")
+    public ResponseEntity<?> updateTimeRegistration(@PathVariable int projectId, @PathVariable int registrationId, @RequestBody TimeRegistration timeRegistration) {
+        Optional<TimeRegistration> existingTimeRegistration = Optional.ofNullable(timeRegistrationService.getTimeRegistrationById(registrationId));
+        if (existingTimeRegistration.isPresent()) {
+            if (existingTimeRegistration.get().getProject().getProjectId() == projectId) {
+                TimeRegistration updatedTimeRegistration = timeRegistrationService.updateTimeRegistration(registrationId, timeRegistration);
+                return new ResponseEntity<>(new TimeRegistrationResponse(updatedTimeRegistration), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("The specified time registration is not associated with the specified project", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<>("The specified time registration does not exist", HttpStatus.NOT_FOUND);
+        }
+    }
+*/
+    @PutMapping("update/registrations/project/{projectId}/{registrationId}")
+    public ResponseEntity<?> updateTimeRegistrationProject(@PathVariable int projectId, @PathVariable int registrationId, @RequestBody TimeRegistration timeRegistration) {
+        Optional<TimeRegistration> existingTimeRegistration = Optional.ofNullable(timeRegistrationService.getTimeRegistrationById(registrationId));
+        if (existingTimeRegistration.isPresent()) {
+            if (existingTimeRegistration.get().getProject().getProjectId() == projectId) {
+                TimeRegistration updatedTimeRegistration = timeRegistrationService.updateTimeRegistration(registrationId, timeRegistration);
+                return new ResponseEntity<>(new TimeRegistrationResponse(updatedTimeRegistration), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("The specified time registration is not associated with the specified project", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<>("The specified time registration does not exist", HttpStatus.NOT_FOUND);
+        }
+    }
 
     @DeleteMapping("/registrations/project/{projectId}/{registrationId}")
     public ResponseEntity<?> deleteTimeRegistration(@PathVariable int projectId, @PathVariable int registrationId) {
@@ -82,8 +112,8 @@ public class TimeRegistrationController {
             return new ResponseEntity<>(updatedTimeRegistration, HttpStatus.OK);
         }
     }
-    @DeleteMapping("delete/{timeRegistrationId}")
-    public ResponseEntity<Void> deleteTimeRegistration(@PathVariable int registrationId) {
+    @DeleteMapping("delete/registration/{timeRegistrationId}")
+    public ResponseEntity<Void> deleteTimeRegistration(@PathVariable ("timeRegistrationId") int registrationId) {
         boolean success = timeRegistrationService.deleteTimeRegistration(registrationId);
         if (success) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
