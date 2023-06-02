@@ -23,7 +23,4 @@ public class Task {
     @Column(name = "tags")
     private String tags;
 
-    @OneToOne(mappedBy = "task")
-    private TimeRegistration registration;
-
 }

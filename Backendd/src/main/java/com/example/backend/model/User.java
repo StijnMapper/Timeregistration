@@ -28,10 +28,9 @@ public class User {
     private UserType type;
 
     @OneToMany(mappedBy = "user")
+    @Column(name = "projects_user")
     private List<Project> projects;
 
     @OneToMany(mappedBy = "user")
     private List<TimeRegistration> registrations;
-
-    // getters and setters
 }
