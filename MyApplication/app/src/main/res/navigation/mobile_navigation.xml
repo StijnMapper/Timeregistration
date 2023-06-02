@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/navigation_time"
-        android:name="com.example.myapplication.ui.timeRegistration.AllTimeRegistrationsFragment"
+        android:name="com.example.myapplication.ui.AllTimeRegistrations.AllTimeRegistrationsFragment"
         android:label="@string/title_time"
         tools:layout="@layout/fragment_time_registration" >
         <action
@@ -46,6 +46,12 @@
         <action
             android:id="@+id/action_navigation_time_to_addProject"
             app:destination="@id/addProject" />
+        <action
+            android:id="@+id/action_navigation_time_to_addProject2"
+            app:destination="@id/addProject" />
+        <action
+            android:id="@+id/action_navigation_time_to_withoutTimerFragment"
+            app:destination="@id/withoutTimerFragment" />
     </fragment>
 
     <fragment
@@ -60,7 +66,7 @@
         tools:layout="@layout/fragment_without_timer" />
     <fragment
         android:id="@+id/timeRegistrationFragment"
-        android:name="com.example.myapplication.ui.timeRegistration.TimeRegistrationFragment"
+        android:name="com.example.myapplication.ui.TimeRegistrationFragment"
         android:label="fragment_time_registration"
         tools:layout="@layout/fragment_time_registration" />
     <fragment
@@ -75,12 +81,16 @@
         tools:layout="@layout/fragment_details_time_regist" />
     <fragment
         android:id="@+id/detailsProject"
-        android:name="com.example.myapplication.DetailsProject"
+        android:name="com.example.myapplication.ui.DetailsProject.DetailsProject"
         android:label="fragment_details_project"
-        tools:layout="@layout/fragment_details_project" />
+        tools:layout="@layout/fragment_details_project" >
+        <action
+            android:id="@+id/action_detailsProject_to_withoutTimerFragment"
+            app:destination="@id/withoutTimerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addProject"
-        android:name="com.example.myapplication.AddProject"
+        android:name="com.example.myapplication.ui.projects.AddProject"
         android:label="fragment_add_project"
         tools:layout="@layout/fragment_add_project" />
 </navigation>

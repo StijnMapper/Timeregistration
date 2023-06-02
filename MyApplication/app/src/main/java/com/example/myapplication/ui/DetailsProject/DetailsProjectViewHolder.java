@@ -17,9 +17,9 @@ public class DetailsProjectViewHolder extends RecyclerView.ViewHolder{
     ImageButton edit;
     public DetailsProjectViewHolder(@NonNull View itemView) {
         super(itemView);
-        startTime=itemView.findViewById(R.id.startTime);
-        endTime=itemView.findViewById(R.id.endTime);
-        totalHours=itemView.findViewById(R.id.totalHours);
+        startTime=itemView.findViewById(R.id.startDate);
+        endTime=itemView.findViewById(R.id.startTime);
+       totalHours=itemView.findViewById(R.id.totalHours);
         delete = itemView.findViewById(R.id.delete);
         edit = itemView.findViewById(R.id.edit);
     }

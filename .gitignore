@@ -21,6 +21,9 @@ out/
 .gradle/
 build/
 
+# MapApi
+com.example.myapplication/src/main/res/values/developer-config.xml
+
 # Local configuration file (sdk path, etc)
 local.properties
 
@@ -92,3 +95,4 @@ MyApplication/app/src/main/res/drawable-xhdpi/ic_edit.png
 MyApplication/app/src/main/res/drawable-xxhdpi/ic_delete.png
 MyApplication/app/src/main/res/drawable-xxhdpi/ic_edit.png
 MyApplication/.idea/deploymentTargetDropDown.xml
+MyApplication/app/src/main/java/com/example/myapplication/ProjectListAdapter.java

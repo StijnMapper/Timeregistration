@@ -2,7 +2,7 @@
     <string name="app_name">My Application</string>
     <string name="title_project">Projects</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_time">Time registrations</string>
+    <string name="title_time">Registrations</string>
     <string name="title_date">Calendar</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
@@ -37,4 +37,14 @@
     <string name="title_activity_bottom">BottomActivity</string>
     <string name="title_home">Home</string>
     <string name="title_notifications">Notifications</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoidGV2aGlkZSIsImEiOiJjbGkydzBmZWgwOGxpM2VtbDJpYzFiNnhrIn0.6tq2zbP8aJ4cQnpFVXI6kw</string>
+    <string name="title_activity_geofence">GeofenceActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

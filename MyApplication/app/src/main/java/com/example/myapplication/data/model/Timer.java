@@ -1,10 +1,16 @@
 package com.example.myapplication.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Timer {
     private int timerId;
     private String startTime;
     private String endTime;
     private int duration;
+    @SerializedName("registration")
+    private TimeRegistration timeRegistration;
+
+
 
     public int getTimerId() {
         return timerId;

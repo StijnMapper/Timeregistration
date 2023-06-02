@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddProject">
+    tools:context=".ui.projects.AddProject">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,8 +16,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"
-            android:padding="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="15dp"
             android:text="Project name"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/goal"
             app:layout_constraintTop_toBottomOf="parent" />
 
@@ -27,8 +30,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/blue"
-            android:padding="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="15dp"
             android:text="Goal"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/description"
             app:layout_constraintTop_toBottomOf="@id/name" />
 
@@ -38,8 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/blue"
-            android:padding="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="15dp"
             android:text="Description"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/client"
             app:layout_constraintTop_toBottomOf="@+id/goal" />
 
@@ -49,8 +58,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/blue"
-            android:padding="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="15dp"
             android:text="Client"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/deadline"
             app:layout_constraintTop_toBottomOf="@id/description" />
 
@@ -60,8 +72,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/blue"
-            android:padding="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="15dp"
             android:text="Final deadline"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/budget"
             app:layout_constraintTop_toBottomOf="@id/client" />
 
@@ -71,8 +86,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/blue"
-            android:padding="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="15dp"
             android:text="Budget"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/billable"
             app:layout_constraintTop_toBottomOf="@id/deadline" />
 
@@ -82,9 +100,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@color/blue"
-            android:padding="10dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="15dp"
             android:text="Billable"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/save"
             app:layout_constraintTop_toBottomOf="@id/budget" />
         <Button
@@ -92,12 +113,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:backgroundTint="@color/green"
             android:text="Save"
+            android:textColor="@color/white"
             android:theme="@style/Button.green"
             app:layout_constraintTop_toBottomOf="@id/billable"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

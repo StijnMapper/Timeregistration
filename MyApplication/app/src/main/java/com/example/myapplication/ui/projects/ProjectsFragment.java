@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.projects;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,19 @@ import retrofit2.Response;
 public class ProjectsFragment extends Fragment {
     private ProjectAdapter projectAdapter;
     private RecyclerView recyclerView;
+    private int projectId;
     private List<Project> projects = new ArrayList<>();
+    public ProjectsFragment() {
+        // Required empty public constructor
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        // Get the selected project ID from the arguments
+        if (getArguments() != null) {
+            projectId = getArguments().getInt("projectId");
+        }}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_projects, container, false);
@@ -67,13 +79,13 @@ public class ProjectsFragment extends Fragment {
                 if (response.isSuccessful()) {
                     projects = response.body();
                     projectAdapter.setProjects(projects);
-                    //  Log.d("Tag", "Number of projects retrieved: " + projects.size());
+                      Log.d("Tag", "Number of projects retrieved: " + projects.size());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
-                //Log.d("Tag", "Error: " + t.getMessage());
+                Log.d("Tag", "Error: " + t.getMessage());
 
             }
         });

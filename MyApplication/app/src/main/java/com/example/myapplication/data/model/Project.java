@@ -1,10 +1,7 @@
 package com.example.myapplication.data.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Project {
     private int projectId;
-
     private String name;
     private String status;
     private String description;

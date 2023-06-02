@@ -171,7 +171,6 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     calendar = Calendar.getInstance();
 
-    // Andere code ...
 
     Button saveButton = view.findViewById(R.id.save);
     saveButton.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +232,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
     public void updateTimeRegistration(int projectId, int registrationId, TimeRegistration timeRegistration) {
         TimeRegistrationService service = RetrofitClient.getRetrofitInstance().create(TimeRegistrationService.class);
-        Call<TimeRegistration> call = service.updateTimeRegistration(projectId, registrationId, timeRegistration);
+        Call<TimeRegistration> call = service.updateTimeRegistrationProject(projectId, registrationId, timeRegistration);
         call.enqueue(new Callback<TimeRegistration>() {
             @Override
             public void onResponse(Call<TimeRegistration> call, Response<TimeRegistration> response) {

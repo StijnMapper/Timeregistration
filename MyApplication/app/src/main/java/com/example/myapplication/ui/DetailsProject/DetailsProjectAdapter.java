@@ -122,7 +122,7 @@ public class DetailsProjectAdapter extends RecyclerView.Adapter<DetailsProjectAd
         // Maak een instantie van de TimeRegistrationService met behulp van RetrofitClient
         TimeRegistrationService service = RetrofitClient.getRetrofitInstance().create(TimeRegistrationService.class);
         // Maak een API-aanroep om de tijdregistratie te updaten
-        Call<TimeRegistration> call = service.updateTimeRegistration(projectId, registrationId, timeRegistration);
+        Call<TimeRegistration> call = service.updateTimeRegistrationProject(projectId, registrationId, timeRegistration);
         call.enqueue(new Callback<TimeRegistration>() {
             @Override
             public void onResponse(Call<TimeRegistration> call, Response<TimeRegistration> response) {

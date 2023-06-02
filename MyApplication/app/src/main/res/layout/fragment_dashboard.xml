@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/blue"
-
-
     tools:context=".ui.dashboard.DashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,9 +16,10 @@
 
         <Button
             android:id="@+id/quickBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:textColor="@color/white"
             android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.7"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:backgroundTint="@color/green"
@@ -36,34 +35,35 @@
 
         <Button
             android:id="@+id/withoutTimer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.7"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:backgroundTint="@color/green"
             android:padding="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:text="@string/withoutBtn"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:theme="@style/Button.green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/startTime"
+            app:layout_constraintBottom_toTopOf="@id/startDate"
             app:layout_constraintTop_toBottomOf="@+id/quickBtn" />
 
         <Button
-            android:id="@+id/startTime"
+            android:id="@+id/startDate"
             android:textColor="@color/white"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.7"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:backgroundTint="@color/green"
             android:padding="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:text="@string/startTimeBtn"
             android:textAlignment="center"
             android:theme="@style/Button.green"
@@ -71,6 +71,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/withoutTimer" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

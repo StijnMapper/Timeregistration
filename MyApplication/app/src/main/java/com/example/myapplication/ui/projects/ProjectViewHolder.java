@@ -1,8 +1,6 @@
 package com.example.myapplication.ui.projects;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,7 +12,6 @@ import com.example.myapplication.R;
 public class ProjectViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         ImageButton add;
-
 
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
         android:title="@string/title_dashboard"
-        />
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white" />
 
     <item
         android:id="@+id/navigation_project"
         android:icon="@drawable/ic_article_24"
+        android:title="@string/title_project"
         app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        android:title="@string/title_project" />
+        app:itemTextColor="@color/white" />
 
     <item
         android:id="@+id/navigation_time"
         android:icon="@drawable/ic_access_time_24"
+        android:title="@string/title_time"
         app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        android:title="@string/title_time" />
+        app:itemTextColor="@color/white" />
     <item
         android:id="@+id/navigation_date"
         android:icon="@drawable/ic_calendar_month_24"
+        android:title="@string/title_date"
         app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        android:title="@string/title_date" />
+        app:itemTextColor="@color/white" />
 
 </menu>

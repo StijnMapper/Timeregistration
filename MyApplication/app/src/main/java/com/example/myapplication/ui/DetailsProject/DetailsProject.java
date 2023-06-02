@@ -56,6 +56,7 @@ public class DetailsProject extends Fragment {
         if (actionBar != null) {
             actionBar.setTitle("Details Project");
         }
+
         FragmentDetailsProjectBinding binding = FragmentDetailsProjectBinding.inflate(inflater, container, false);
 
         //time registrations
@@ -69,49 +70,9 @@ public class DetailsProject extends Fragment {
 
         fetchTimeRegistrations();
 
-       //deleteTimeRegistration(registrationId);
         return binding.getRoot();
     }
 
-    public void deleteTimeRegistration(int timeRegistrationId) {
-        TimeRegistrationService service = RetrofitClient.getRetrofitInstance().create(TimeRegistrationService.class);
-        Call<Void> callDelete = service.deleteTimeRegistration(registrationId);
-        callDelete.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-                if (response.isSuccessful()) {
-                    // Remove the deleted time registration from the list
-                    int indexToRemove = -1;
-                    for (int i = 0; i < timeRegistrations.size(); i++) {
-                        TimeRegistration tr = timeRegistrations.get(i);
-                        if (tr.getRegistrationId() == timeRegistrationId) {
-                            indexToRemove = i;
-                            Log.d(DetailsProject.class.getSimpleName(), "registrationId " + timeRegistrationId);
-                            break;
-                        }
-                    }
-                    Log.d(DetailsProject.class.getSimpleName(), "registrationId " + timeRegistrationId);
-
-                    if (indexToRemove >= 0) {
-                        timeRegistrations.remove(indexToRemove);
-                        adapter.notifyItemRemoved(indexToRemove);
-
-                    }
-
-                    Log.d(DetailsProject.class.getSimpleName(), "Time registration deleted successfully");
-                } else {
-                    Log.e(DetailsProject.class.getSimpleName(), "Error deleting time registration: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.e(DetailsProject.class.getSimpleName(), t.getMessage(), t);
-            }
-        });
-
-    }
     private void fetchTimeRegistrations() {
         TimeRegistrationService service = RetrofitClient.getRetrofitInstance().create(TimeRegistrationService.class);
         Call<List<TimeRegistration>> call = service.getTimeRegistrationsByProjectId(projectId);
@@ -122,6 +83,7 @@ public class DetailsProject extends Fragment {
                 if (response.isSuccessful()) {
                     timeRegistrations = response.body();
                     adapter.setRegistrations(timeRegistrations);
+                    Log.d(DetailsProject.class.getSimpleName(), String.valueOf(timeRegistrations.get(0).getProject().getProjectId()));
 
                     Log.d(DetailsProject.class.getSimpleName(), "Number of registraions retrieved: " + timeRegistrations.size());
 
@@ -139,9 +101,6 @@ public class DetailsProject extends Fragment {
                     String total = String.format("%02d:%02d:%02d", minutes, hours, seconds);
                     Log.d(DetailsProject.class.getSimpleName(), "total: " + total);
                     totalHours.setText(total);
-
-
-
                 } else {
                     Log.e("API", "Error getting duration of time registrations: " + response.code());
                 }
@@ -152,9 +111,6 @@ public class DetailsProject extends Fragment {
                 Log.e(DetailsProject.class.getSimpleName(), t.getMessage(), t);
             }
         });
-
-        }
-
-
+    }
 }
 
