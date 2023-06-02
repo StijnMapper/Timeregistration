@@ -27,6 +27,10 @@ import retrofit2.Response;
 public class AllTimeRegistrationsFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    private int projectId;
+    private int registrationId;
+    private TimeRegistration timeRegistration;
+
     List<TimeRegistration> registrations =  new ArrayList<>();
 
     private MyAdapter myAdapter;
@@ -38,15 +42,13 @@ public class AllTimeRegistrationsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default ) {
-            @Override
-            public void handleOnBackPressed() {
-                // Handle the back button event
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-        */
+        // Ontvang de argumenten van de DetailsProject
+        if (getArguments() != null) {
+            // Haal de waarden op uit de argumenten
+            registrationId = getArguments().getInt("registrationId");
+            projectId = getArguments().getInt("projectId");
+            timeRegistration = getArguments().getParcelable("timeRegistration");
+        }
 
     }
 
@@ -78,7 +80,7 @@ public class AllTimeRegistrationsFragment extends Fragment {
             public void onResponse(Call<List<TimeRegistration>> call, Response<List<TimeRegistration>> response) {
                 if (response.isSuccessful()) {
                     registrations = response.body();
-                    myAdapter.setRegistrations(registrations);
+                    myAdapter.setTimeRegistrations(registrations);
                     Log.d(AllTimeRegistrationsFragment.class.getSimpleName(), "Number of all registrations retrieved: " + registrations.size());
                 }
             }
